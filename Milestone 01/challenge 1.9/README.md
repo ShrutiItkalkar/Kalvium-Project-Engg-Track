@@ -13,24 +13,29 @@ You will be building a standalone Task Manager. You must strictly follow the req
 
 ## Live Deployments
 
-- Vibe version: ADD YOUR LINK HERE
-- Pair version: ADD YOUR LINK HERE
+- Vibe version: endearing-trifle-369de0.netlify.app
+- Pair version: https://kalvium-project-engg-track-bei23k70j.vercel.app
+
+
 
 ## Comparison Table
 
-Fill out the following table after completing both versions:
+| Dimension      | Vibe Version (Netlify) | Pair Version (React + Copilot) | Verdict |
+|----------------|------------------------|--------------------------------|---------|
+| Speed          | Generated full app in ~10–15 minutes | Took ~40–50 minutes to build manually | Vibe faster |
+| Control        | AI decided structure and components | I controlled every component and logic | Pair better |
+| Code Quality   | Many auto-generated files and complex structure | Clean and simple code in fewer files | Pair better |
+| Explainability | Hard to understand some parts of code | I can explain every line I wrote | Pair better |
+| Editability    | Difficult to modify logic across files | Easy to update features quickly | Pair better |
 
-| Dimension | Vibe Version | Pair Version |
-| :--- | :--- | :--- |
-| **Speed** | | |
-| **Control** | | |
-| **Code Quality** | | |
-| **Explainability** | | |
-| **Editability** | | |
 
 ## When I Would Use Each Tool
 
-- 
+**Vibe coding tool for:**  
+Quick demos, UI prototypes, or when I need a fast working app — because it generates everything instantly.
+
+**AI pair programming for:**  
+Production apps or assignments — because I understand the code and can easily debug and modify it.
 - 
 
 ## Tools Used
