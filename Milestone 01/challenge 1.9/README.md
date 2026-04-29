@@ -13,7 +13,7 @@ You will be building a standalone Task Manager. You must strictly follow the req
 
 ## Live Deployments
 
-- Vibe version: endearing-trifle-369de0.netlify.app
+- Vibe version: https://endearing-trifle-369de0.netlify.app/
 - Pair version: https://kalvium-project-engg-track-bei23k70j.vercel.app
 
 
