@@ -13,6 +13,11 @@ app.post("/chat", async (req, res) => {
   try {
     const { messages } = req.body;
 
+    // Validate input
+    if (!messages || !Array.isArray(messages)) {
+      return res.status(400).json({ error: "Invalid messages format" });
+    }
+
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -27,8 +32,16 @@ app.post("/chat", async (req, res) => {
 
     const data = await response.json();
 
+    // Handle API error
+    if (!response.ok) {
+      return res.status(response.status).json({
+        error: data?.error?.message || "AI API error"
+      });
+    }
+
     const reply =
-      data?.choices?.[0]?.message?.content || "No response from AI";
+      data?.choices?.[0]?.message?.content ||
+      "Sorry, I couldn't generate a response.";
 
     res.json({ reply });
 

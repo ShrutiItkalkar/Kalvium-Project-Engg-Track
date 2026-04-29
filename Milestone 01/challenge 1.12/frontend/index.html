@@ -2,58 +2,94 @@
 <html>
 <head>
   <title>AI Chatbot</title>
+
   <style>
     body {
       font-family: Arial;
       max-width: 600px;
       margin: auto;
       padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h2 {
+      text-align: center;
     }
 
     #chat {
       height: 400px;
-      overflow-y: scroll;
+      overflow-y: auto;
       border: 1px solid #ccc;
       padding: 10px;
       margin-bottom: 10px;
+      background: white;
+      border-radius: 5px;
     }
 
     .user {
       color: blue;
-      margin: 5px 0;
+      margin: 8px 0;
+      text-align: right;
     }
 
     .bot {
       color: green;
-      margin: 5px 0;
+      margin: 8px 0;
+      text-align: left;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
     }
 
     input {
-      width: 75%;
+      flex: 1;
       padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
 
     button {
-      padding: 10px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
+
 <body>
 
 <h2>AI Chatbot</h2>
 
 <div id="chat"></div>
 
-<input type="text" id="message" placeholder="Type your message..." />
-<button onclick="sendMessage()">Send</button>
+<div class="input-area">
+  <input type="text" id="message" placeholder="Type your message..." />
+  <button onclick="sendMessage()">Send</button>
+</div>
 
 <script>
 let messages = [];
 
-async function sendMessage() {
-  const input = document.getElementById("message");
-  const text = input.value.trim();
+const input = document.getElementById("message");
 
+// Enter key support
+input.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    sendMessage();
+  }
+});
+
+async function sendMessage() {
+  const text = input.value.trim();
   if (!text) return;
 
   // Add user message
@@ -62,7 +98,7 @@ async function sendMessage() {
 
   input.value = "";
 
-  // Show typing indicator
+  // Show typing
   messages.push({ role: "assistant", content: "Typing..." });
   updateChat();
 
@@ -77,18 +113,26 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    // Remove "Typing..."
+    // Remove typing
     messages.pop();
 
-    // Add real response
-    messages.push({ role: "assistant", content: data.reply });
+    // Add AI reply
+    messages.push({
+      role: "assistant",
+      content: data.reply || "No response"
+    });
+
     updateChat();
 
   } catch (error) {
     console.error("Error:", error);
 
     messages.pop();
-    messages.push({ role: "assistant", content: "Error getting response" });
+    messages.push({
+      role: "assistant",
+      content: "Error connecting to server"
+    });
+
     updateChat();
   }
 }
@@ -100,7 +144,7 @@ function updateChat() {
   messages.forEach(msg => {
     const div = document.createElement("div");
     div.className = msg.role === "user" ? "user" : "bot";
-    div.textContent = `${msg.role}: ${msg.content}`;
+    div.textContent = msg.content;
     chat.appendChild(div);
   });
 
